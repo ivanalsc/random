@@ -5,6 +5,9 @@ import { Inter } from "next/font/google";
 import LogoutButton from "@/components/LogoutButton";
 import { useEffect, useState } from "react";
 import { supabase } from "./utils/supabaseClient";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,7 +47,9 @@ export default function RootLayout({
             </div>
           )}
         </header>
+        <QueryClientProvider client={queryClient}>
         <main>{children}</main>
+        </QueryClientProvider>
       </body>
     </html>
   );
